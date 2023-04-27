@@ -1,5 +1,5 @@
 {
-  "name": "json_to_csv_generator",
+  "name": "json_to_csv_generate",
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
