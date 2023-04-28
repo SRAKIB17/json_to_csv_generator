@@ -1,5 +1,5 @@
 
-import { mkdir, openSync, readFile, readFileSync, write } from 'fs'
+import { close, mkdir, openSync, readFile, readFileSync, write } from 'fs'
 
 type JSONValue =
     | string
@@ -43,6 +43,13 @@ function json_to_csv({ json, destination = '', file_name = 'test' }: { json: JSO
                             success: true, message: `successfully inserted into ${destination}/${file_name}.csv`,
                             data: data.toString()
                         })
+                        close(csvFile, (err) => {
+                            if (err)
+                                console.error('Failed to close file', err);
+                            else {
+                                console.log("\n> File Closed successfully");
+                            }
+                        });
                         return {
                             success: true, message: `successfully inserted into ${destination}/${file_name}.csv`,
                             data: data.toString()
