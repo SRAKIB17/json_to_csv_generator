@@ -1,4 +1,8 @@
-# Version: 1.1.0
+# Version: 1.1.2
+
+```
+npm i json_to_csv_generate
+```
 
 ## Configure
 
