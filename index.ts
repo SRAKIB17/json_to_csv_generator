@@ -1,5 +1,5 @@
 
-import { close, mkdir, openSync, readFile, readFileSync, write } from 'fs'
+import { close, mkdir, openSync, readFile, readFileSync, write, writeFile } from 'fs'
 
 type JSONValue =
     | string
@@ -68,4 +68,42 @@ function json_to_csv({ json, destination = '', file_name = 'test' }: { json: JSO
         }
     }
 }
+
+function json_file_to_csv({ file_path = '', file_name, destination }: { file_path: string, file_name: string, destination: string }) {
+    readFile(file_path, function (err, data) {
+        if (err) {
+            console.log(err)
+            return {
+                success: false, message: 'something is wrong'
+            }
+        }
+        else {
+            const json = JSON.parse(data?.toString())
+            let csvData = JSON.stringify(Object.keys(json?.[0]))?.slice(1, -1) + `
+`
+            for (const x of json) {
+                csvData += JSON.stringify(Object.values(x))?.slice(1, -1) + `
+`
+            }
+            const path = `${destination}/${file_name}.csv`
+            writeFile(path, csvData, { flag: 'w+' }, function (err) {
+                if (err)
+                    console.error("Failed to close file", err);
+                else {
+                    console.log("File Closed successfully");
+
+                    try {
+                    }
+                    catch (err) {
+                        console.error("Cannot find stats of file", err);
+                    }
+                }
+            }
+            );
+
+        }
+    });
+}
+
+export { json_file_to_csv }
 export default json_to_csv

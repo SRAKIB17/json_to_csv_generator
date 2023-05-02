@@ -1,4 +1,16 @@
-# Version: 1.1.2
+# Version: 1.1.3
+
+## What's new:
+
+version: 1.1.3
+
+1. json file to csv file.
+
+```js
+json_file_to_csv({ file_path: 'test/test.json', destination: 'test', file_name: 'test53545345' })
+```
+
+## How to install:
 
 ```
 npm i json_to_csv_generate
